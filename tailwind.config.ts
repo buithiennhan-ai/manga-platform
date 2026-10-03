@@ -7,15 +7,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#f97316',
-        dark: '#0f172a',
-        accent: '#facc15',
+        primary: '#0066cc',     // Xanh dương chủ đạo
+        secondary: '#004a99',   // Xanh dương đậm
+        light: '#e8f0ff',       // Xanh dương nhạt
+        neutral: '#f5f7fa',     // Xám nhạt gần trắng
+        dark: '#1a1a1a',        // Đen mềm
+        text: '#2d3748',        // Xám tối cho text
       },
       boxShadow: {
-        soft: '0 10px 30px rgba(15, 23, 42, 0.12)',
+        soft: '0 4px 12px rgba(0, 102, 204, 0.08)',
+        md: '0 2px 8px rgba(0, 0, 0, 0.06)',
       },
-      backgroundImage: {
-        hero: 'radial-gradient(circle at top, rgba(249,115,22,0.22), transparent 40%)',
+      spacing: {
+        safe: '1rem',
       },
     },
   },

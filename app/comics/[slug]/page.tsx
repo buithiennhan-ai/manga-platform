@@ -10,62 +10,90 @@ export default function ComicDetailPage({ params }: { params: { slug: string } }
   }
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
-      <div className="mx-auto max-w-6xl px-4 py-10 lg:px-8">
-        <Link href="/comics" className="mb-6 inline-block text-sm text-orange-300 hover:text-orange-200">
-          ← Back to library
+    <main className="min-h-screen bg-white">
+      <div className="mx-auto max-w-6xl px-4 py-8">
+        <Link href="/comics" className="mb-6 inline-block text-sm font-semibold text-primary hover:text-secondary">
+          ← Quay lại thư viện
         </Link>
 
-        <div className="grid gap-8 rounded-3xl border border-white/10 bg-slate-900/80 p-6 md:grid-cols-[300px_1fr] md:p-8">
-          <img src={comic.cover} alt={comic.title} className="h-[440px] w-full rounded-2xl object-cover" />
-
+        <div className="grid gap-8 md:grid-cols-[280px_1fr]">
+          {/* Cover Image */}
           <div>
-            <div className="mb-3 flex flex-wrap gap-2">
+            <img
+              src={comic.cover}
+              alt={comic.title}
+              className="w-full rounded-xl border-2 border-light object-cover shadow-md"
+            />
+          </div>
+
+          {/* Content */}
+          <div className="space-y-6">
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2">
               {comic.tags.map((tag) => (
-                <span key={tag} className="rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1 text-xs text-orange-200">
+                <span
+                  key={tag}
+                  className="rounded-full bg-light px-3 py-1 text-xs font-semibold text-primary"
+                >
                   {tag}
                 </span>
               ))}
             </div>
 
-            <h1 className="text-4xl font-black">{comic.title}</h1>
-
-            <div className="mt-4 flex flex-wrap gap-6 text-sm text-slate-300">
-              <span>Author: {comic.author}</span>
-              <span>Status: {comic.status}</span>
-              <span>Views: {comic.views}</span>
-              <span>Rating: ⭐ {comic.rating}</span>
+            {/* Title & Info */}
+            <div className="space-y-2">
+              <h1 className="text-4xl font-bold text-dark">{comic.title}</h1>
+              <p className="text-lg text-gray-600">Tác giả: <span className="font-semibold text-dark">{comic.author}</span></p>
             </div>
 
-            <p className="mt-6 max-w-2xl text-slate-300">{comic.description}</p>
-
-            <div className="mt-8 flex flex-wrap gap-4">
-              <a
-                href={`/chapter/${comic.chapters[0].id}`}
-                className="rounded-full bg-orange-500 px-6 py-3 font-semibold text-white transition hover:bg-orange-400"
-              >
-                Read first chapter
-              </a>
-              <button className="rounded-full border border-white/15 px-6 py-3 font-semibold text-white transition hover:bg-white/5">
-                Follow series
-              </button>
-            </div>
-
-            <div className="mt-10">
-              <h2 className="mb-4 text-xl font-bold">Chapter list</h2>
-              <div className="space-y-3">
-                {comic.chapters.map((chapter) => (
-                  <Link
-                    key={chapter.id}
-                    href={`/chapter/${chapter.id}`}
-                    className="flex items-center justify-between rounded-2xl border border-white/10 bg-slate-800/80 px-4 py-3 text-sm text-slate-200 hover:border-orange-500/40 hover:bg-slate-800"
-                  >
-                    <span>{chapter.title}</span>
-                    <span>{chapter.date}</span>
-                  </Link>
-                ))}
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-4 rounded-lg bg-light p-4">
+              <div>
+                <p className="text-xs font-semibold text-gray-600">Trạng thái</p>
+                <p className="text-lg font-bold text-primary">{comic.status}</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-600">Lượt xem</p>
+                <p className="text-lg font-bold text-primary">{comic.views}</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-600">Đánh giá</p>
+                <p className="text-lg font-bold text-primary">⭐ {comic.rating}</p>
               </div>
             </div>
+
+            {/* Description */}
+            <p className="text-base leading-relaxed text-gray-700">{comic.description}</p>
+
+            {/* Buttons */}
+            <div className="flex flex-wrap gap-3">
+              <a
+                href={`/chapter/${comic.chapters[0].id}`}
+                className="rounded-lg bg-primary px-6 py-3 font-semibold text-white transition hover:bg-secondary"
+              >
+                Đọc chương đầu
+              </a>
+              <button className="rounded-lg border-2 border-primary px-6 py-3 font-semibold text-primary transition hover:bg-light">
+                ♥ Theo dõi
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Chapters List */}
+        <div className="mt-12 border-t border-gray-200 pt-8">
+          <h2 className="mb-6 text-2xl font-bold text-dark">Danh sách chương</h2>
+          <div className="space-y-2">
+            {comic.chapters.map((chapter) => (
+              <Link
+                key={chapter.id}
+                href={`/chapter/${chapter.id}`}
+                className="flex items-center justify-between rounded-lg border-2 border-gray-200 px-4 py-3 text-sm font-semibold text-dark transition hover:border-primary hover:bg-light"
+              >
+                <span>{chapter.title}</span>
+                <span className="text-xs text-gray-600">{chapter.date}</span>
+              </Link>
+            ))}
           </div>
         </div>
       </div>

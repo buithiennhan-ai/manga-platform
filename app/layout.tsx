@@ -4,14 +4,14 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'MangaVerse - Read Your Favorite Manga',
-  description: 'Modern manga and comic platform with thousands of titles',
+  title: 'MangaVerse - Đọc Truyện Tranh Yêu Thích',
+  description: 'Nền tảng đọc truyện tranh hiện đại với giao diện tối giản',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="bg-slate-950 text-white">
+    <html lang="vi">
+      <body className="bg-white text-text">
         <Header />
         {children}
         <Footer />
