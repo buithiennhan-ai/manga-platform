@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id    String  @id @default(cuid())
+  name  String  @unique
+  slug  String  @unique
+  comics Comic[]
+}
+
+model Comic {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  title       String
+  author      String
+  status      String
+  views       Int        @default(0)
+  rating      Float      @default(0)
+  description String
+  coverUrl    String
+  updatedAt   DateTime   @default(now())
+  categories  Category[]
+  chapters    Chapter[]
+}
+
+model Chapter {
+  id        String       @id @default(cuid())
+  number    Int
+  title     String
+  comicId   String
+  comic     Comic        @relation(fields: [comicId], references: [id])
+  pages     ChapterPage[]
+  createdAt DateTime     @default(now())
+}
+
+model ChapterPage {
+  id        String  @id @default(cuid())
+  chapterId String
+  chapter   Chapter @relation(fields: [chapterId], references: [id])
+  imageUrl  String
+  order     Int
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  avatar    String?
+  password  String
+  createdAt DateTime @default(now())
+}
